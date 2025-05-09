@@ -1,274 +1,386 @@
+import { Home, ShoppingBag, Calendar, MessageSquare, Users, BarChart, Settings, Star, Construction, Brush, Scissors, Music, Monitor, Camera, Utensils, BookOpen, Truck, PaintBrush, Code, Cloud, Heart, Leaf, Fire, Lightbulb, Water, Snowflake, Mountain, Tree, Sun, Moon, Umbrella, Coffee, Beer, Wine, Cocktail } from 'lucide-react';
 
-// Types
-export interface Category {
-  id: string;
-  name: string;
-  icon: string;
-  description: string;
-  count: number;
-}
-
-export interface Artisan {
-  id: string;
-  name: string;
-  profileImage: string;
-  category: string;
-  categoryId: string;
-  rating: number;
-  reviewCount: number;
-  location: string;
-  distance: string;
-  responseTime: string;
-  verified: boolean;
-  featured: boolean;
-  completionRate: number;
-  yearsExperience: number;
-  portfolio: string[];
-  about: string;
-  services: string[];
-  pricing: {
-    min: number;
-    max: number;
-    currency: string;
-  };
-}
-
-// Sample data
-export const categories: Category[] = [
+export const categories = [
   {
-    id: 'plumbing',
-    name: 'Plumbers',
-    icon: '🔧',
-    description: 'Expert plumbers for all your water system needs',
-    count: 27
+    id: 'home-services',
+    name: 'Home Services',
+    icon: Home,
+    description: 'Plumbers, electricians, cleaners, and more.',
+    count: 28,
   },
   {
-    id: 'electrical',
-    name: 'Electricians',
-    icon: '⚡',
-    description: 'Licensed electricians for installations and repairs',
-    count: 34
+    id: 'shopping',
+    name: 'Shopping',
+    icon: ShoppingBag,
+    description: 'Unique handmade crafts and goods.',
+    count: 15,
   },
   {
-    id: 'carpentry',
-    name: 'Carpenters',
-    icon: '🪚',
-    description: 'Skilled carpenters for custom woodwork and repairs',
-    count: 19
+    id: 'events',
+    name: 'Events',
+    icon: Calendar,
+    description: 'Photographers, caterers, and event planners.',
+    count: 10,
   },
   {
-    id: 'painting',
-    name: 'Painters',
-    icon: '🎨',
-    description: 'Professional painters for interior and exterior work',
-    count: 23
+    id: 'lessons',
+    name: 'Lessons',
+    icon: BookOpen,
+    description: 'Learn new skills from local artisans.',
+    count: 7,
   },
   {
-    id: 'gardening',
-    name: 'Gardeners',
-    icon: '🌱',
-    description: 'Experienced gardeners for landscape maintenance',
-    count: 15
+    id: 'transport',
+    name: 'Transport',
+    icon: Truck,
+    description: 'Reliable transport and delivery services.',
+    count: 5,
   },
   {
-    id: 'cleaning',
-    name: 'Cleaners',
-    icon: '🧹',
-    description: 'Thorough cleaning services for homes and businesses',
-    count: 41
+    id: 'design',
+    name: 'Design',
+    icon: PaintBrush,
+    description: 'Graphic design, web design, and more.',
+    count: 12,
   },
   {
-    id: 'security',
-    name: 'Security',
-    icon: '🔒',
-    description: 'Security system installation and maintenance',
-    count: 12
+    id: 'tech',
+    name: 'Tech',
+    icon: Code,
+    description: 'Web development, app development, and IT support.',
+    count: 9,
   },
   {
-    id: 'moving',
-    name: 'Movers',
-    icon: '📦',
-    description: 'Reliable movers for home and office relocations',
-    count: 9
-  }
+    id: 'other',
+    name: 'Other',
+    icon: Cloud,
+    description: 'Miscellaneous services and skills.',
+    count: 20,
+  },
+  {
+    id: 'health',
+    name: 'Health & Wellness',
+    icon: Heart,
+    description: 'Massage therapists, personal trainers, and more.',
+    count: 14,
+  },
+  {
+    id: 'nature',
+    name: 'Nature & Outdoors',
+    icon: Leaf,
+    description: 'Landscaping, gardening, and outdoor services.',
+    count: 8,
+  },
+  {
+    id: 'energy',
+    name: 'Energy & Utilities',
+    icon: Fire,
+    description: 'Solar panel installation, energy audits, and more.',
+    count: 6,
+  },
+  {
+    id: 'innovation',
+    name: 'Innovation & Tech',
+    icon: Lightbulb,
+    description: 'Cutting-edge tech solutions and innovations.',
+    count: 11,
+  },
+  {
+    id: 'water-services',
+    name: 'Water Services',
+    icon: Water,
+    description: 'Plumbing, water purification, and more.',
+    count: 4,
+  },
+  {
+    id: 'winter-services',
+    name: 'Winter Services',
+    icon: Snowflake,
+    description: 'Snow removal, winter maintenance, and more.',
+    count: 3,
+  },
+  {
+    id: 'mountain-adventures',
+    name: 'Mountain Adventures',
+    icon: Mountain,
+    description: 'Hiking guides, mountain climbing, and more.',
+    count: 2,
+  },
+  {
+    id: 'tree-services',
+    name: 'Tree Services',
+    icon: Tree,
+    description: 'Tree trimming, tree removal, and more.',
+    count: 9,
+  },
+  {
+    id: 'sun-services',
+    name: 'Sun Services',
+    icon: Sun,
+    description: 'Solar panel installation, sun tanning, and more.',
+    count: 7,
+  },
+  {
+    id: 'moon-services',
+    name: 'Moon Services',
+    icon: Moon,
+    description: 'Night photography, astronomy tours, and more.',
+    count: 5,
+  },
+  {
+    id: 'umbrella-services',
+    name: 'Umbrella Services',
+    icon: Umbrella,
+    description: 'Umbrella repair, umbrella rental, and more.',
+    count: 10,
+  },
+  {
+    id: 'coffee-services',
+    name: 'Coffee Services',
+    icon: Coffee,
+    description: 'Coffee brewing, coffee tasting, and more.',
+    count: 12,
+  },
+  {
+    id: 'beer-services',
+    name: 'Beer Services',
+    icon: Beer,
+    description: 'Beer brewing, beer tasting, and more.',
+    count: 8,
+  },
+  {
+    id: 'wine-services',
+    name: 'Wine Services',
+    icon: Wine,
+    description: 'Wine making, wine tasting, and more.',
+    count: 6,
+  },
+  {
+    id: 'cocktail-services',
+    name: 'Cocktail Services',
+    icon: Cocktail,
+    description: 'Cocktail making, cocktail tasting, and more.',
+    count: 11,
+  },
 ];
 
-export const artisans: Artisan[] = [
+export const artisans = [
   {
-    id: 'a1',
-    name: 'John Nkosi',
-    profileImage: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=200&h=200&auto=format&fit=crop',
-    category: 'Plumber',
-    categoryId: 'plumbing',
-    rating: 4.9,
-    reviewCount: 127,
-    location: 'Cape Town',
-    distance: '3.2 km',
-    responseTime: '10 min',
-    verified: true,
-    featured: true,
-    completionRate: 98,
-    yearsExperience: 12,
-    portfolio: [
-      'https://images.unsplash.com/photo-1521207418485-99c705420785?q=80&w=400&h=300&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1581141849291-1125c7b692b5?q=80&w=400&h=300&auto=format&fit=crop'
+    id: 'art1',
+    name: 'John Carpenter',
+    category: 'home-services',
+    skills: ['carpentry', 'furniture repair', 'woodworking'],
+    location: 'Sandton, Johannesburg',
+    rating: 4.5,
+    description: 'Experienced carpenter specializing in custom furniture and repairs.',
+    image: '/images/artisans/carpenter.jpg',
+    services: ['Furniture Repair', 'Custom Furniture', 'Woodworking'],
+    yearsOfExperience: 15,
+    hourlyRate: 350,
+    contact: '+27 82 123 4567',
+    availability: 'Mon-Fri, 8am-5pm',
+    reviews: [
+      { id: 'rev1', author: 'Samantha J.', rating: 5, comment: 'John did an amazing job fixing my antique chair!' },
+      { id: 'rev2', author: 'Peter K.', rating: 4, comment: 'Good work, but slightly expensive.' },
     ],
-    about: 'Certified master plumber with over 12 years of experience in residential and commercial plumbing services.',
-    services: ['Leak repairs', 'Pipe installations', 'Bathroom renovations', 'Geyser installations'],
-    pricing: {
-      min: 350,
-      max: 850,
-      currency: 'R'
-    }
   },
   {
-    id: 'a2',
-    name: 'Thandi Mbeki',
-    profileImage: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=200&h=200&auto=format&fit=crop',
-    category: 'Electrician',
-    categoryId: 'electrical',
+    id: 'art2',
+    name: 'Mary Plumber',
+    category: 'home-services',
+    skills: ['plumbing', 'pipe fitting', 'drain cleaning'],
+    location: 'Rosebank, Johannesburg',
     rating: 4.8,
-    reviewCount: 94,
-    location: 'Johannesburg',
-    distance: '5.1 km',
-    responseTime: '15 min',
-    verified: true,
-    featured: true,
-    completionRate: 96,
-    yearsExperience: 8,
-    portfolio: [
-      'https://images.unsplash.com/photo-1621905251189-08b45249be53?q=80&w=400&h=300&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1555963966-b7ae5404b6ed?q=80&w=400&h=300&auto=format&fit=crop'
+    description: 'Reliable plumber for all your plumbing needs.',
+    image: '/images/artisans/plumber.jpg',
+    services: ['Pipe Repair', 'Drain Cleaning', 'Geyser Installation'],
+    yearsOfExperience: 10,
+    hourlyRate: 400,
+    contact: '+27 73 987 6543',
+    availability: '24/7 Emergency Services',
+    reviews: [
+      { id: 'rev3', author: 'Linda M.', rating: 5, comment: 'Mary was quick to respond and fixed my burst pipe in no time!' },
+      { id: 'rev4', author: 'George L.', rating: 5, comment: 'Excellent service and very professional.' },
     ],
-    about: 'Licensed electrician specializing in residential wiring, troubleshooting, and smart home installations.',
-    services: ['Electrical repairs', 'Installation', 'Lighting', 'Safety inspections'],
-    pricing: {
-      min: 400,
-      max: 950,
-      currency: 'R'
-    }
   },
   {
-    id: 'a3',
-    name: 'David Naidoo',
-    profileImage: 'https://images.unsplash.com/photo-1566492031773-4f4e44671857?q=80&w=200&h=200&auto=format&fit=crop',
-    category: 'Carpenter',
-    categoryId: 'carpentry',
-    rating: 4.7,
-    reviewCount: 78,
-    location: 'Durban',
-    distance: '2.8 km',
-    responseTime: '25 min',
-    verified: true,
-    featured: false,
-    completionRate: 94,
-    yearsExperience: 15,
-    portfolio: [
-      'https://images.unsplash.com/photo-1601659406312-63ea9096d398?q=80&w=400&h=300&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1583600427407-995927c7509f?q=80&w=400&h=300&auto=format&fit=crop'
+    id: 'art3',
+    name: 'David Electrician',
+    category: 'home-services',
+    skills: ['electrical wiring', 'light installation', 'fault finding'],
+    location: 'Braamfontein, Johannesburg',
+    rating: 4.2,
+    description: 'Certified electrician for residential and commercial properties.',
+    image: '/images/artisans/electrician.jpg',
+    services: ['Electrical Wiring', 'Light Installation', 'Fault Finding'],
+    yearsOfExperience: 8,
+    hourlyRate: 380,
+    contact: '+27 60 234 5678',
+    availability: 'Mon-Sat, 9am-6pm',
+    reviews: [
+      { id: 'rev5', author: 'Karen P.', rating: 4, comment: 'David was punctual and did a great job installing my new lights.' },
+      { id: 'rev6', author: 'Tom S.', rating: 3, comment: 'Average service, but got the job done.' },
     ],
-    about: 'Master carpenter with expertise in custom furniture, cabinetry, and detailed woodworking projects.',
-    services: ['Custom furniture', 'Cabinetry', 'Installations', 'Repairs'],
-    pricing: {
-      min: 300,
-      max: 1200,
-      currency: 'R'
-    }
   },
   {
-    id: 'a4',
-    name: 'Sophie van Wyk',
-    profileImage: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=200&h=200&auto=format&fit=crop',
-    category: 'Painter',
-    categoryId: 'painting',
+    id: 'art4',
+    name: 'Samantha Photographer',
+    category: 'events',
+    skills: ['photography', 'event photography', 'portrait photography'],
+    location: 'Pretoria, Gauteng',
     rating: 4.9,
-    reviewCount: 112,
-    location: 'Pretoria',
-    distance: '4.3 km',
-    responseTime: '20 min',
-    verified: true,
-    featured: true,
-    completionRate: 99,
-    yearsExperience: 10,
-    portfolio: [
-      'https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?q=80&w=400&h=300&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=400&h=300&auto=format&fit=crop'
+    description: 'Professional photographer for weddings, events, and portraits.',
+    image: '/images/artisans/photographer.jpg',
+    services: ['Wedding Photography', 'Event Photography', 'Portrait Photography'],
+    yearsOfExperience: 7,
+    hourlyRate: 500,
+    contact: '+27 84 345 6789',
+    availability: 'Weekends and Public Holidays',
+    reviews: [
+      { id: 'rev7', author: 'Jessica B.', rating: 5, comment: 'Samantha captured our wedding day perfectly! Highly recommended.' },
+      { id: 'rev8', author: 'Michael D.', rating: 5, comment: 'Amazing photos and very easy to work with.' },
     ],
-    about: 'Professional painter specializing in interior and exterior painting with expertise in decorative techniques.',
-    services: ['Interior painting', 'Exterior painting', 'Decorative finishes', 'Color consultation'],
-    pricing: {
-      min: 250,
-      max: 800,
-      currency: 'R'
-    }
   },
   {
-    id: 'a5',
-    name: 'Sipho Mthembu',
-    profileImage: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&h=200&auto=format&fit=crop',
-    category: 'Gardener',
-    categoryId: 'gardening',
+    id: 'art5',
+    name: 'Thando Caterer',
+    category: 'events',
+    skills: ['catering', 'event catering', 'food preparation'],
+    location: 'Durban, KwaZulu-Natal',
     rating: 4.6,
-    reviewCount: 86,
-    location: 'Cape Town',
-    distance: '6.7 km',
-    responseTime: '30 min',
-    verified: true,
-    featured: false,
-    completionRate: 92,
-    yearsExperience: 7,
-    portfolio: [
-      'https://images.unsplash.com/photo-1558904541-efa843a96f01?q=80&w=400&h=300&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1530331333676-0474d8c36196?q=80&w=400&h=300&auto=format&fit=crop'
+    description: 'Delicious catering services for all types of events.',
+    image: '/images/artisans/caterer.jpg',
+    services: ['Event Catering', 'Corporate Catering', 'Private Catering'],
+    yearsOfExperience: 12,
+    hourlyRate: 450,
+    contact: '+27 79 456 7890',
+    availability: 'Flexible, contact for availability',
+    reviews: [
+      { id: 'rev9', author: 'Nadia R.', rating: 5, comment: 'Thando provided the most delicious food for our corporate event.' },
+      { id: 'rev10', author: 'Brian H.', rating: 4, comment: 'Great food, but a bit pricey.' },
     ],
-    about: 'Experienced gardener with knowledge of native South African plants and sustainable landscaping practices.',
-    services: ['Garden maintenance', 'Landscaping', 'Irrigation systems', 'Tree services'],
-    pricing: {
-      min: 200,
-      max: 600,
-      currency: 'R'
-    }
   },
   {
-    id: 'a6',
-    name: 'Lerato Molefe',
-    profileImage: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&h=200&auto=format&fit=crop',
-    category: 'Cleaner',
-    categoryId: 'cleaning',
-    rating: 4.8,
-    reviewCount: 156,
-    location: 'Johannesburg',
-    distance: '2.4 km',
-    responseTime: '5 min',
-    verified: true,
-    featured: true,
-    completionRate: 97,
-    yearsExperience: 5,
-    portfolio: [
-      'https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=400&h=300&auto=format&fit=crop',
-      'https://images.unsplash.com/photo-1596263576925-11ccb3533d8c?q=80&w=400&h=300&auto=format&fit=crop'
+    id: 'art6',
+    name: 'Aisha Seamstress',
+    category: 'shopping',
+    skills: ['sewing', 'tailoring', 'clothing design'],
+    location: 'Cape Town, Western Cape',
+    rating: 4.7,
+    description: 'Custom sewing and tailoring services for all your clothing needs.',
+    image: '/images/artisans/seamstress.jpg',
+    services: ['Custom Sewing', 'Tailoring', 'Clothing Design'],
+    yearsOfExperience: 10,
+    hourlyRate: 300,
+    contact: '+27 76 567 8901',
+    availability: 'Mon-Fri, 10am-6pm',
+    reviews: [
+      { id: 'rev11', author: 'Leah C.', rating: 5, comment: 'Aisha did an amazing job altering my wedding dress!' },
+      { id: 'rev12', author: 'Richard F.', rating: 4, comment: 'Good quality work and reasonable prices.' },
     ],
-    about: 'Detail-oriented cleaning professional with eco-friendly cleaning approaches for homes and offices.',
-    services: ['Deep cleaning', 'Regular maintenance', 'Move-in/out cleaning', 'Office cleaning'],
-    pricing: {
-      min: 180,
-      max: 450,
-      currency: 'R'
-    }
-  }
+  },
+  {
+    id: 'art7',
+    name: 'Zola Potter',
+    category: 'shopping',
+    skills: ['pottery', 'ceramics', 'handmade crafts'],
+    location: 'Johannesburg, Gauteng',
+    rating: 4.5,
+    description: 'Unique handmade pottery and ceramics for your home.',
+    image: '/images/artisans/potter.jpg',
+    services: ['Pottery', 'Ceramics', 'Handmade Crafts'],
+    yearsOfExperience: 5,
+    hourlyRate: 250,
+    contact: '+27 83 678 9012',
+    availability: 'Weekends, 10am-4pm',
+    reviews: [
+      { id: 'rev13', author: 'Susan W.', rating: 5, comment: 'Zola’s pottery is beautiful and unique. I love my new vase!' },
+      { id: 'rev14', author: 'Mark T.', rating: 4, comment: 'Nice work, but a bit expensive for the size.' },
+    ],
+  },
+  {
+    id: 'art8',
+    name: 'Nandi Tutor',
+    category: 'lessons',
+    skills: ['tutoring', 'math', 'science'],
+    location: 'Cape Town, Western Cape',
+    rating: 4.8,
+    description: 'Experienced tutor for math and science subjects.',
+    image: '/images/artisans/tutor.jpg',
+    services: ['Math Tutoring', 'Science Tutoring', 'Homework Help'],
+    yearsOfExperience: 6,
+    hourlyRate: 320,
+    contact: '+27 74 789 0123',
+    availability: 'Mon-Fri, 3pm-7pm',
+    reviews: [
+      { id: 'rev15', author: 'Lisa G.', rating: 5, comment: 'Nandi helped my son improve his math grade significantly.' },
+      { id: 'rev16', author: 'David U.', rating: 5, comment: 'Excellent tutor and very patient.' },
+    ],
+  },
+  {
+    id: 'art9',
+    name: 'Sipho Driver',
+    category: 'transport',
+    skills: ['driving', 'transport', 'delivery'],
+    location: 'Johannesburg, Gauteng',
+    rating: 4.9,
+    description: 'Reliable driving and transport services for all your needs.',
+    image: '/images/artisans/driver.jpg',
+    services: ['Driving Services', 'Transport Services', 'Delivery Services'],
+    yearsOfExperience: 9,
+    hourlyRate: 370,
+    contact: '+27 81 890 1234',
+    availability: '24/7, contact for availability',
+    reviews: [
+      { id: 'rev17', author: 'Thandi N.', rating: 5, comment: 'Sipho is always on time and very professional.' },
+      { id: 'rev18', author: 'Peter V.', rating: 5, comment: 'Great service and very reliable.' },
+    ],
+  },
+  {
+    id: 'art10',
+    name: 'Lerato Designer',
+    category: 'design',
+    skills: ['graphic design', 'web design', 'logo design'],
+    location: 'Pretoria, Gauteng',
+    rating: 4.6,
+    description: 'Creative graphic and web designer for all your design needs.',
+    image: '/images/artisans/designer.jpg',
+    services: ['Graphic Design', 'Web Design', 'Logo Design'],
+    yearsOfExperience: 7,
+    hourlyRate: 420,
+    contact: '+27 72 901 2345',
+    availability: 'Mon-Fri, 9am-5pm',
+    reviews: [
+      { id: 'rev19', author: 'Karen L.', rating: 5, comment: 'Lerato created a beautiful logo for my business.' },
+      { id: 'rev20', author: 'John M.', rating: 4, comment: 'Good design work, but a bit slow to respond.' },
+    ],
+  },
 ];
 
-export const filterArtisansByCategory = (categoryId: string | null): Artisan[] => {
-  if (!categoryId) return artisans.filter(a => a.featured);
-  return artisans.filter(a => a.categoryId === categoryId);
+export const getCategoryById = (id: string | null) => {
+  if (!id) return null;
+  return categories.find(category => category.id === id);
 };
 
-export const getArtisanById = (id: string | null): Artisan | undefined => {
-  if (!id) return undefined;
-  return artisans.find(a => a.id === id);
+export const filterArtisansByCategory = (categoryId: string | null) => {
+  if (!categoryId) {
+    return artisans;
+  }
+  return artisans.filter(artisan => artisan.category === categoryId);
 };
 
-export const getCategoryById = (id: string | null): Category | undefined => {
-  if (!id) return undefined;
-  return categories.find(c => c.id === id);
+export const filterArtisansBySearch = (searchTerm: string) => {
+  if (!searchTerm) {
+    return [];
+  }
+  
+  const lowercaseSearch = searchTerm.toLowerCase();
+  
+  return artisans.filter((artisan) => {
+    return (
+      artisan.name.toLowerCase().includes(lowercaseSearch) ||
+      artisan.skills.some(skill => skill.toLowerCase().includes(lowercaseSearch)) ||
+      artisan.location.toLowerCase().includes(lowercaseSearch)
+    );
+  });
 };

@@ -14,6 +14,10 @@ import Footer from "./components/layout/Footer";
 import Index from "./pages/Index";
 import Category from "./pages/Category";
 import ArtisanProfile from "./pages/ArtisanProfile";
+import Search from "./pages/Search";
+import Bookings from "./pages/Bookings";
+import Messages from "./pages/Messages";
+import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -41,6 +45,10 @@ const App = () => {
                   <Route path="/" element={<Index />} />
                   <Route path="/category/:id" element={<Category />} />
                   <Route path="/artisan/:id" element={<ArtisanProfile />} />
+                  <Route path="/search" element={<Search />} />
+                  <Route path="/bookings" element={<Bookings />} />
+                  <Route path="/messages" element={<Messages />} />
+                  <Route path="/profile" element={<Profile />} />
                   <Route path="*" element={<NotFound />} />
                 </Routes>
               </main>
