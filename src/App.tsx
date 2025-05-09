@@ -40,7 +40,7 @@ const App = () => {
               <Navbar toggleSidebar={toggleSidebar} />
               <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
               
-              <main className="pt-16 flex-1">
+              <main className="pt-16 flex-1 lg:pl-64">
                 <Routes>
                   <Route path="/" element={<Index />} />
                   <Route path="/category/:id" element={<Category />} />

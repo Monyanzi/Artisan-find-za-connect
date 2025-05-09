@@ -17,7 +17,8 @@ const Hero: React.FC = () => {
             Find Trusted Artisans in South Africa
           </h1>
           <p className="text-white/90 text-lg mb-8">
-            Connect with verified professionals for quality service, from plumbing to electrical work and more.
+            Connect with South Africa's most searched professionals: plumbers, electricians, painters, 
+            carpenters, builders, gardeners, security specialists, and HVAC technicians for quality service in your area.
           </p>
           
           <div className="bg-white p-1 rounded-lg shadow-lg">

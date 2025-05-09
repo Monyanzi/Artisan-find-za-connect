@@ -36,7 +36,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
       `}>
         <div className="h-full flex flex-col">
           <div className="p-4 border-b flex items-center justify-between">
-            <Link to="/" className="flex items-center">
+            <Link to="/" className="flex items-center" onClick={onClose}>
               <span className="text-xl font-bold text-primary">ArtisanFind<span className="text-accent">SA</span></span>
             </Link>
             <Button variant="ghost" size="icon" onClick={onClose} className="lg:hidden">
@@ -90,7 +90,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                   className="flex items-center py-2 px-4 rounded-lg hover:bg-gray-100"
                 >
                   <span className="mr-3 text-lg">
-                    {category.icon && <category.icon size={18} />}
+                    {category.icon && React.createElement(category.icon, { size: 18 })}
                   </span>
                   <span>{category.name}</span>
                   <span className="ml-auto text-xs text-gray-500">{category.count}</span>
