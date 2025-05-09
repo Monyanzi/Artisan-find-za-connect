@@ -1,7 +1,7 @@
 
 import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Check, MapPin, Clock, Calendar, Phone, MessageSquare, Star, Whatsapp } from 'lucide-react';
+import { ArrowLeft, Check, MapPin, Clock, Calendar, Phone, MessageSquare, Star, WhatsApp } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Badge from '@/components/common/Badge';
@@ -221,7 +221,7 @@ const ArtisanProfile: React.FC = () => {
                 <Button variant="outline" size="lg" className="w-full flex items-center justify-center" 
                   onClick={() => window.open(`https://wa.me/27000000000?text=Hi%20${artisan.name}%2C%20I%20found%20you%20on%20ArtisanFindSA.%20I'm%20interested%20in%20booking%20your%20services.`, '_blank')}
                 >
-                  <Whatsapp className="h-5 w-5 mr-2 text-green-600" />
+                  <WhatsApp className="h-5 w-5 mr-2 text-green-600" />
                   <span className="text-green-600">WhatsApp</span>
                 </Button>
                 
