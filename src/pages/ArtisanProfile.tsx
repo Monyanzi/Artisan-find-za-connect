@@ -1,7 +1,7 @@
 
 import React, { useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { ArrowLeft, Check, MapPin, Clock, Calendar, Phone, MessageSquare, Star, WhatsApp } from 'lucide-react';
+import { ArrowLeft, Check, MapPin, Clock, Calendar, Phone, MessageSquare, Star } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import Badge from '@/components/common/Badge';
@@ -221,7 +221,12 @@ const ArtisanProfile: React.FC = () => {
                 <Button variant="outline" size="lg" className="w-full flex items-center justify-center" 
                   onClick={() => window.open(`https://wa.me/27000000000?text=Hi%20${artisan.name}%2C%20I%20found%20you%20on%20ArtisanFindSA.%20I'm%20interested%20in%20booking%20your%20services.`, '_blank')}
                 >
-                  <WhatsApp className="h-5 w-5 mr-2 text-green-600" />
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 mr-2 text-green-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M3 21l1.65-3.8a9 9 0 1 1 3.4 2.9L3 21" />
+                    <path d="M9 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1Z" />
+                    <path d="M14 10a.5.5 0 0 0 1 0V9a.5.5 0 0 0-1 0v1Z" />
+                    <path d="M12 18a6 6 0 0 0 6-6c0-1.5-1-2.5-3-5-2 2.5-3 3.5-3 5a2 2 0 0 0 4 0c0-.5-.5-1-1-1" />
+                  </svg>
                   <span className="text-green-600">WhatsApp</span>
                 </Button>
                 

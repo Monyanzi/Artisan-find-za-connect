@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { User, Home, MessageSquare, Search, Calendar, ArrowLeft, Category } from 'lucide-react';
+import { User, Home, MessageSquare, Search, Calendar, ArrowLeft } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { categories } from '@/utils/data';
 import { useApp } from '@/contexts/AppContext';
