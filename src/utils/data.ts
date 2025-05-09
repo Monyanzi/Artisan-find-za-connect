@@ -45,6 +45,8 @@ export interface Artisan {
     max: number;
   };
   completionRate?: number;
+  joinedDate?: string;
+  specialties?: string[];
 }
 
 export const categories = [
@@ -240,6 +242,8 @@ export const artisans = [
       max: 500
     },
     completionRate: 98,
+    joinedDate: 'Jan 2020',
+    specialties: ['Custom Furniture', 'Reclaimed Wood', 'Bespoke Designs'],
     reviews: [
       { id: 'rev1', author: 'Samantha J.', rating: 5, comment: 'John did an amazing job fixing my antique chair!' },
       { id: 'rev2', author: 'Peter K.', rating: 4, comment: 'Good work, but slightly expensive.' },
@@ -273,6 +277,8 @@ export const artisans = [
       max: 550
     },
     completionRate: 97,
+    joinedDate: 'Mar 2019',
+    specialties: ['Geyser Expert', '24/7 Emergency', 'Drain Cleaning'],
     reviews: [
       { id: 'rev3', author: 'Linda M.', rating: 5, comment: 'Mary was quick to respond and fixed my burst pipe in no time!' },
       { id: 'rev4', author: 'George L.', rating: 5, comment: 'Excellent service and very professional.' },
@@ -306,6 +312,8 @@ export const artisans = [
       max: 480
     },
     completionRate: 95,
+    joinedDate: 'Sep 2021',
+    specialties: ['Electrical Installations', 'Lighting Design', 'Emergency Repairs'],
     reviews: [
       { id: 'rev5', author: 'Karen P.', rating: 4, comment: 'David was punctual and did a great job installing my new lights.' },
       { id: 'rev6', author: 'Tom S.', rating: 3, comment: 'Average service, but got the job done.' },
@@ -339,6 +347,8 @@ export const artisans = [
       max: 700
     },
     completionRate: 99,
+    joinedDate: 'Jun 2018',
+    specialties: ['Wedding Photography', 'Portrait Photography', 'Event Coverage'],
     reviews: [
       { id: 'rev7', author: 'Jessica B.', rating: 5, comment: 'Samantha captured our wedding day perfectly! Highly recommended.' },
       { id: 'rev8', author: 'Michael D.', rating: 5, comment: 'Amazing photos and very easy to work with.' },
@@ -372,6 +382,8 @@ export const artisans = [
       max: 600
     },
     completionRate: 96,
+    joinedDate: 'Nov 2020',
+    specialties: ['Gourmet Cuisine', 'Custom Menus', 'Dietary Options'],
     reviews: [
       { id: 'rev9', author: 'Nadia R.', rating: 5, comment: 'Thando provided the most delicious food for our corporate event.' },
       { id: 'rev10', author: 'Brian H.', rating: 4, comment: 'Great food, but a bit pricey.' },
@@ -405,6 +417,8 @@ export const artisans = [
       max: 450
     },
     completionRate: 97,
+    joinedDate: 'Apr 2022',
+    specialties: ['Bridal Alterations', 'Custom Designs', 'Clothing Repairs'],
     reviews: [
       { id: 'rev11', author: 'Leah C.', rating: 5, comment: 'Aisha did an amazing job altering my wedding dress!' },
       { id: 'rev12', author: 'Richard F.', rating: 4, comment: 'Good quality work and reasonable prices.' },
@@ -438,6 +452,8 @@ export const artisans = [
       max: 350
     },
     completionRate: 94,
+    joinedDate: 'Jul 2021',
+    specialties: ['Functional Pottery', 'Decorative Ceramics', 'Custom Orders'],
     reviews: [
       { id: 'rev13', author: 'Susan W.', rating: 5, comment: 'Zola’s pottery is beautiful and unique. I love my new vase!' },
       { id: 'rev14', author: 'Mark T.', rating: 4, comment: 'Nice work, but a bit expensive for the size.' },
@@ -471,6 +487,8 @@ export const artisans = [
       max: 400
     },
     completionRate: 98,
+    joinedDate: 'Dec 2019',
+    specialties: ['Math Specialist', 'Science Expert', 'Exam Prep'],
     reviews: [
       { id: 'rev15', author: 'Lisa G.', rating: 5, comment: 'Nandi helped my son improve his math grade significantly.' },
       { id: 'rev16', author: 'David U.', rating: 5, comment: 'Excellent tutor and very patient.' },
@@ -504,6 +522,8 @@ export const artisans = [
       max: 500
     },
     completionRate: 99,
+    joinedDate: 'Aug 2020',
+    specialties: ['Airport Transfers', 'Parcel Delivery', 'Long Distance'],
     reviews: [
       { id: 'rev17', author: 'Thandi N.', rating: 5, comment: 'Sipho is always on time and very professional.' },
       { id: 'rev18', author: 'Peter V.', rating: 5, comment: 'Great service and very reliable.' },
@@ -537,6 +557,8 @@ export const artisans = [
       max: 550
     },
     completionRate: 96,
+    joinedDate: 'Feb 2021',
+    specialties: ['Branding', 'UI/UX Design', 'Print Media'],
     reviews: [
       { id: 'rev19', author: 'Karen L.', rating: 5, comment: 'Lerato created a beautiful logo for my business.' },
       { id: 'rev20', author: 'John M.', rating: 4, comment: 'Good design work, but a bit slow to respond.' },

@@ -9,9 +9,9 @@ const Hero: React.FC = () => {
   const { searchTerm, setSearchTerm } = useApp();
 
   return (
-    <div className="relative bg-primary overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary to-secondary opacity-90"></div>
-      <div className="relative container-custom py-16 md:py-24">
+    <div className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 overflow-hidden">
+      <div className="absolute inset-0 bg-[url('/lovable-uploads/8785989a-e088-46b1-9e6d-77220291abbf.png')] bg-cover bg-center opacity-10"></div>
+      <div className="relative container-custom py-16 md:py-20">
         <div className="max-w-3xl mx-auto text-center">
           <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4">
             Find Trusted Artisans in South Africa
