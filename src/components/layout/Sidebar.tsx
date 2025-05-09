@@ -67,7 +67,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
               className="flex items-center py-2 px-4 rounded-lg hover:bg-gray-100 mt-2"
             >
               <Calendar className="h-5 w-5 mr-3 text-primary" />
-              <span>My Bookings</span>
+              <span>Bookings</span>
             </Link>
             <Link 
               to="/messages"
@@ -89,7 +89,9 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                   onClick={() => handleCategorySelect(category.id)}
                   className="flex items-center py-2 px-4 rounded-lg hover:bg-gray-100"
                 >
-                  <span className="mr-3 text-lg">{category.icon}</span>
+                  <span className="mr-3 text-lg">
+                    {category.icon && <category.icon size={18} />}
+                  </span>
                   <span>{category.name}</span>
                   <span className="ml-auto text-xs text-gray-500">{category.count}</span>
                 </Link>

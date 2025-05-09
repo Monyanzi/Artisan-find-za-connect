@@ -46,7 +46,9 @@ const Category: React.FC = () => {
       
       <div className="mb-8">
         <div className="flex items-center mb-2">
-          <span className="text-3xl mr-3">{category.icon}</span>
+          <span className="text-3xl mr-3">
+            {category.icon && <category.icon size={24} />}
+          </span>
           <h1 className="text-2xl md:text-3xl font-bold">{category.name}</h1>
         </div>
         <p className="text-gray-600">{category.description}</p>
