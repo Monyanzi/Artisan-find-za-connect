@@ -7,7 +7,7 @@ import { artisans } from '@/utils/data';
 
 const FeaturedArtisans: React.FC = () => {
   // Get featured artisans
-  const featuredArtisans = artisans.filter(artisan => artisan.featured);
+  const featuredArtisans = artisans.filter(artisan => artisan.featured === true);
   
   return (
     <section className="py-12 bg-gray-50">

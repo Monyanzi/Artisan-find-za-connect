@@ -31,7 +31,7 @@ const ArtisanCard: React.FC<ArtisanCardProps> = ({
       >
         <div className="relative w-full md:w-1/3 h-48 md:h-auto">
           <img 
-            src={artisan.profileImage} 
+            src={artisan.profileImage || artisan.image || '/placeholder.svg'} 
             alt={artisan.name}
             className="w-full h-full object-cover"
           />
@@ -52,32 +52,51 @@ const ArtisanCard: React.FC<ArtisanCardProps> = ({
               <p className="text-gray-600 text-sm">{artisan.category}</p>
             </div>
             <div className="text-right">
-              <RatingStars rating={artisan.rating} reviews={artisan.reviewCount} />
-              <p className="text-sm text-gray-500 mt-1">{artisan.yearsExperience} years exp.</p>
+              <RatingStars rating={artisan.rating} reviews={artisan.reviewCount || artisan.reviews.length} />
+              <p className="text-sm text-gray-500 mt-1">
+                {artisan.yearsExperience || artisan.yearsOfExperience} years exp.
+              </p>
             </div>
           </div>
           
           <div className="mt-4 flex flex-wrap gap-2 text-sm">
             <div className="flex items-center text-gray-600">
               <MapPin className="h-4 w-4 mr-1" />
-              {artisan.location} • {artisan.distance}
+              {artisan.location} {artisan.distance && `• ${artisan.distance}`}
             </div>
-            <div className="flex items-center text-gray-600">
-              <Clock className="h-4 w-4 mr-1" />
-              Responds in {artisan.responseTime}
-            </div>
+            {artisan.responseTime && (
+              <div className="flex items-center text-gray-600">
+                <Clock className="h-4 w-4 mr-1" />
+                Responds in {artisan.responseTime}
+              </div>
+            )}
           </div>
           
-          <p className="mt-3 text-sm line-clamp-2">{artisan.about}</p>
+          <p className="mt-3 text-sm line-clamp-2">{artisan.about || artisan.description}</p>
           
           <div className="mt-4 flex items-center justify-between">
             <div className="text-sm">
-              <span className="font-semibold text-primary">{artisan.pricing.currency}{artisan.pricing.min} - {artisan.pricing.currency}{artisan.pricing.max}</span>
-              <span className="text-gray-500"> avg. price</span>
+              {artisan.pricing ? (
+                <>
+                  <span className="font-semibold text-primary">
+                    {artisan.pricing.currency}{artisan.pricing.min} - {artisan.pricing.currency}{artisan.pricing.max}
+                  </span>
+                  <span className="text-gray-500"> avg. price</span>
+                </>
+              ) : (
+                <>
+                  <span className="font-semibold text-primary">
+                    R{artisan.hourlyRate}
+                  </span>
+                  <span className="text-gray-500"> /hour</span>
+                </>
+              )}
             </div>
-            <Badge variant={artisan.completionRate > 95 ? 'accent' : 'outline'}>
-              {artisan.completionRate}% Completion
-            </Badge>
+            {artisan.completionRate && (
+              <Badge variant={artisan.completionRate > 95 ? 'accent' : 'outline'}>
+                {artisan.completionRate}% Completion
+              </Badge>
+            )}
           </div>
         </div>
       </Link>
@@ -92,7 +111,7 @@ const ArtisanCard: React.FC<ArtisanCardProps> = ({
     >
       <div className="relative">
         <img 
-          src={artisan.profileImage} 
+          src={artisan.profileImage || artisan.image || '/placeholder.svg'} 
           alt={artisan.name}
           className="w-full h-40 object-cover"
         />
@@ -117,17 +136,25 @@ const ArtisanCard: React.FC<ArtisanCardProps> = ({
         
         <div className="mt-2 flex items-center text-sm text-gray-600">
           <MapPin className="h-3 w-3 mr-1" />
-          {artisan.location} • {artisan.distance}
+          {artisan.location} {artisan.distance && `• ${artisan.distance}`}
         </div>
         
         <div className="mt-4 flex items-center justify-between text-sm">
-          <span className="font-semibold text-primary">
-            {artisan.pricing.currency}{artisan.pricing.min} - {artisan.pricing.currency}{artisan.pricing.max}
-          </span>
-          <div className="flex items-center text-gray-600">
-            <Clock className="h-3 w-3 mr-1" />
-            {artisan.responseTime}
-          </div>
+          {artisan.pricing ? (
+            <span className="font-semibold text-primary">
+              {artisan.pricing.currency}{artisan.pricing.min} - {artisan.pricing.currency}{artisan.pricing.max}
+            </span>
+          ) : (
+            <span className="font-semibold text-primary">
+              R{artisan.hourlyRate}/hr
+            </span>
+          )}
+          {artisan.responseTime && (
+            <div className="flex items-center text-gray-600">
+              <Clock className="h-3 w-3 mr-1" />
+              {artisan.responseTime}
+            </div>
+          )}
         </div>
       </div>
     </Link>

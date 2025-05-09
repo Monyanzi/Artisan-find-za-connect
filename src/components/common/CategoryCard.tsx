@@ -22,7 +22,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ category }) => {
       className="card p-4 flex flex-col items-center text-center transition-all hover:scale-105"
     >
       <div className="h-16 w-16 flex items-center justify-center bg-primary/10 rounded-full text-2xl mb-3">
-        {category.icon}
+        {category.icon && <category.icon size={24} />}
       </div>
       <h3 className="font-semibold text-base">{category.name}</h3>
       <p className="text-xs text-gray-500 mt-1">{category.count} available</p>
