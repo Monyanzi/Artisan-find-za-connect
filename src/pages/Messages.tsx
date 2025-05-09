@@ -8,7 +8,7 @@ const Messages: React.FC = () => {
     {
       id: 'msg1',
       name: 'John Carpenter',
-      lastMessage: 'I'll be there tomorrow at 10 AM as agreed.',
+      lastMessage: 'I\'ll be there tomorrow at 10 AM as agreed.',
       time: '2 hours ago',
       unread: true,
     },
