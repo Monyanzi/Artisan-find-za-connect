@@ -135,6 +135,27 @@ const ArtisanProfile: React.FC = () => {
               </div>
             </div>
           </div>
+
+          {/* Customer Reviews Section */}
+          <div className="bg-white rounded-lg shadow-sm p-6">
+            <h2 className="text-xl font-semibold mb-4">Customer Reviews</h2>
+            {artisan.reviews && artisan.reviews.length > 0 ? (
+              <div className="space-y-6">
+                {artisan.reviews.map((review) => (
+                  <div key={review.id} className="pb-4 border-b border-gray-100 last:border-b-0 last:pb-0">
+                    <div className="flex items-center mb-1">
+                      <RatingStars rating={review.rating} size="sm" showValue={false} />
+                      <span className="ml-2 font-semibold text-gray-700">{review.author}</span>
+                    </div>
+                    {/* Review Date would go here if available - <p className="text-xs text-gray-500 mb-1">{review.date}</p> */}
+                    <p className="text-gray-600 text-sm">{review.comment}</p>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="text-gray-500">No reviews yet for this artisan.</p>
+            )}
+          </div>
         </div>
         
         <div>

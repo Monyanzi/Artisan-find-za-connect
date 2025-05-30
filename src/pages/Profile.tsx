@@ -2,20 +2,44 @@
 import React from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { User, Settings, Star } from 'lucide-react';
+import { User, Settings, Star, LogIn } from 'lucide-react'; // Added LogIn
 import { Button } from '@/components/ui/button';
+import { useApp } from '@/contexts/AppContext'; // Import useApp hook
 
 const Profile: React.FC = () => {
-  // Mock user data
-  const user = {
-    name: 'Alex Johnson',
-    email: 'alex@example.com',
-    phone: '+27 71 234 5678',
-    joinDate: 'May 2023',
-    location: 'Cape Town, South Africa',
-    // For display purposes only
-    isArtisan: false
+  const { isAuthenticated, currentUser, login, logout } = useApp(); // Get auth state and functions
+
+  // Use a mock user for login if needed, or rely on AppContext's initial login
+  // This specific mockUser is for the login button if user is not authenticated.
+  // AppContext already logs in mockAppContextUser on load.
+  const handleMockLogin = () => {
+    // This is just an example, ideally, you'd have a proper user object or form
+    const mockLoginUser = { 
+      id: 'temp-user', 
+      name: 'Guest User', 
+      email: 'guest@example.com', 
+      phone: '0000000000', 
+      joinDate: new Date().toDateString(), 
+      location: 'Unknown', 
+      isArtisan: false 
+    };
+    login(mockLoginUser);
   };
+
+  if (!isAuthenticated || !currentUser) {
+    return (
+      <div className="container-custom py-16 min-h-screen text-center">
+        <h1 className="text-2xl md:text-3xl font-bold mb-6">Profile</h1>
+        <p className="text-gray-600 mb-4">Please log in to view your profile.</p>
+        <Button onClick={handleMockLogin}>
+          <LogIn className="mr-2 h-4 w-4" /> Login (Mock)
+        </Button>
+      </div>
+    );
+  }
+
+  // Now currentUser is guaranteed to be non-null
+  const user = currentUser;
 
   return (
     <div className="container-custom py-16 min-h-screen">
@@ -26,7 +50,11 @@ const Profile: React.FC = () => {
           <Card className="mb-6">
             <CardHeader className="text-center">
               <div className="w-24 h-24 rounded-full bg-gray-200 mx-auto mb-4 flex items-center justify-center">
-                <User className="h-12 w-12 text-gray-500" />
+                {user.profileImage ? (
+                  <img src={user.profileImage} alt={user.name} className="w-full h-full object-cover rounded-full" />
+                ) : (
+                  <User className="h-12 w-12 text-gray-500" />
+                )}
               </div>
               <CardTitle>{user.name}</CardTitle>
               <p className="text-sm text-gray-500">Client since {user.joinDate}</p>
@@ -70,7 +98,7 @@ const Profile: React.FC = () => {
                 <Button variant="ghost" className="w-full justify-start">Notification Preferences</Button>
                 <Button variant="ghost" className="w-full justify-start">Payment Methods</Button>
                 <Button variant="ghost" className="w-full justify-start">Security Settings</Button>
-                <Button variant="ghost" className="w-full justify-start text-destructive">Sign Out</Button>
+                <Button variant="ghost" className="w-full justify-start text-destructive" onClick={logout}>Sign Out</Button>
               </div>
             </CardContent>
           </Card>

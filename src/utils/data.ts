@@ -593,3 +593,36 @@ export const filterArtisansBySearch = (searchTerm: string) => {
     );
   });
 };
+
+// Export a mock user for AppContext
+// For now, we can use an Artisan as a User, or define a specific User type if needed.
+// Let's use the structure Profile.tsx expects:
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  phone: string;
+  joinDate: string;
+  location: string;
+  isArtisan: boolean;
+  // Add other fields from Artisan if they become commonly used by User context
+  profileImage?: string; 
+  category?: string;
+  skills?: string[];
+  description?: string;
+  // etc.
+}
+
+export const mockAppContextUser: User = {
+  id: artisans[0].id,
+  name: artisans[0].name,
+  email: 'john.carpenter@example.com', // Mock email
+  phone: artisans[0].contact,
+  joinDate: artisans[0].joinedDate || 'Jan 2020',
+  location: artisans[0].location,
+  isArtisan: true, // John Carpenter is an artisan
+  profileImage: artisans[0].profileImage,
+  category: artisans[0].category,
+  skills: artisans[0].skills,
+  description: artisans[0].description,
+};
