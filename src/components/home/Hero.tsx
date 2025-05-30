@@ -4,9 +4,18 @@ import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useApp } from '@/contexts/AppContext';
 import SearchBar from '../common/SearchBar';
+import { useToast } from '@/components/ui/use-toast'; // Import useToast
 
 const Hero: React.FC = () => {
   const { searchTerm, setSearchTerm } = useApp();
+  const { toast } = useToast();
+
+  const handleComingSoon = (featureName: string) => {
+    toast({
+      title: featureName,
+      description: "This feature is coming soon!",
+    });
+  };
 
   return (
     <div className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 overflow-hidden">
@@ -32,10 +41,10 @@ const Hero: React.FC = () => {
           
           <div className="mt-6 flex flex-wrap justify-center gap-2 text-sm">
             <span className="text-white/80">Popular:</span>
-            <Button variant="link" className="text-white h-auto p-0">Plumbing</Button>
-            <Button variant="link" className="text-white h-auto p-0">Electrical</Button>
-            <Button variant="link" className="text-white h-auto p-0">Painting</Button>
-            <Button variant="link" className="text-white h-auto p-0">Carpentry</Button>
+            <Button variant="link" className="text-white h-auto p-0" onClick={() => handleComingSoon("Popular Category: Plumbing")}>Plumbing</Button>
+            <Button variant="link" className="text-white h-auto p-0" onClick={() => handleComingSoon("Popular Category: Electrical")}>Electrical</Button>
+            <Button variant="link" className="text-white h-auto p-0" onClick={() => handleComingSoon("Popular Category: Painting")}>Painting</Button>
+            <Button variant="link" className="text-white h-auto p-0" onClick={() => handleComingSoon("Popular Category: Carpentry")}>Carpentry</Button>
           </div>
         </div>
       </div>
@@ -43,7 +52,7 @@ const Hero: React.FC = () => {
       <div className="bg-accent py-3">
         <div className="container-custom flex justify-between items-center">
           <p className="text-sm font-medium">Trusted by over 10,000 South Africans</p>
-          <div className="flex items-center">
+          <div className="flex items-center cursor-pointer" onClick={() => handleComingSoon("Learn How It Works")}>
             <span className="text-sm font-medium">Learn how it works</span>
             <ArrowRight className="h-4 w-4 ml-2" />
           </div>

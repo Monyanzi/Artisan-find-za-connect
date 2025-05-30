@@ -1,13 +1,14 @@
 
 import React, { useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { MapPin, Calendar, Clock, CheckCircle, MessageSquare, Phone } from 'lucide-react';
+import { MapPin, Calendar, Clock, CheckCircle, MessageSquare, Phone, Award, Users, Zap } from 'lucide-react'; // Added Award, Users, Zap
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Textarea } from '@/components/ui/textarea';
 import { Input } from '@/components/ui/input';
 import { artisans } from '@/utils/data';
 import RatingStars from '@/components/common/RatingStars';
+import { useToast } from '@/components/ui/use-toast'; // Import useToast
 
 // Function to get artisan by ID
 export const getArtisanById = (id: string | undefined) => {
@@ -17,10 +18,64 @@ export const getArtisanById = (id: string | undefined) => {
 
 const ArtisanProfile: React.FC = () => {
   const { id } = useParams<{ id: string }>();
-  const artisan = getArtisanById(id);
+  const artisan = getArtisanById(id); // artisan object now has new fields
   const [serviceDescription, setServiceDescription] = useState('');
   const [location, setLocation] = useState('');
   const [date, setDate] = useState('');
+  const [time, setTime] = useState(''); // Added state for time
+  const { toast } = useToast(); // Initialize useToast
+  
+  const handleSubmitServiceRequest = () => {
+    if (!serviceDescription || !location || !date || !time) {
+      toast({
+        title: "Missing Information",
+        description: "Please fill out all fields in the service request form.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    console.log("Service Request Submitted:", {
+      artisanId: artisan?.id,
+      artisanName: artisan?.name,
+      serviceDescription,
+      location,
+      preferredDate: date,
+      preferredTime: time,
+    });
+
+    toast({
+      title: "Request Sent!",
+      description: `Your service request has been sent to ${artisan?.name}.`,
+    });
+
+    // Clear form fields
+    setServiceDescription('');
+    setLocation('');
+    setDate('');
+    setTime('');
+  };
+
+  const handleWhatsAppContact = () => {
+    if (!artisan || !artisan.contact) return;
+    const phoneNumber = artisan.contact.replace(/\D/g, ''); // Remove non-digits
+    console.log("Attempting WhatsApp contact with artisan:", artisan.id, "Phone:", phoneNumber);
+    toast({
+      title: "Contacting via WhatsApp",
+      description: `Opening WhatsApp for ${artisan.name}...`,
+    });
+    window.open(`https://wa.me/${phoneNumber}`, '_blank');
+  };
+
+  const handleCallContact = () => {
+    if (!artisan || !artisan.contact) return;
+    console.log("Attempting Call contact with artisan:", artisan.id, "Phone:", artisan.contact);
+    toast({
+      title: "Contacting via Phone",
+      description: `Preparing to call ${artisan.name}...`,
+    });
+    window.open(`tel:${artisan.contact}`);
+  };
   
   if (!artisan) {
     return (
@@ -34,12 +89,14 @@ const ArtisanProfile: React.FC = () => {
   return (
     <div className="container-custom py-16">
       <div className="bg-gray-800 rounded-lg overflow-hidden mb-8 relative">
-        <div className="absolute top-4 right-4">
-          <Badge variant="outline" className="bg-green-600 text-white border-none px-3 py-1 flex items-center">
-            <CheckCircle className="h-4 w-4 mr-1" />
-            Verified
-          </Badge>
-        </div>
+        {artisan.isVerified && (
+          <div className="absolute top-4 right-4">
+            <Badge variant="outline" className="bg-green-600 text-white border-none px-3 py-1 flex items-center">
+              <Award className="h-4 w-4 mr-1" /> {/* Using Award for Verified */}
+              Verified
+            </Badge>
+          </div>
+        )}
         <div className="p-8 text-white flex flex-col md:flex-row items-center md:items-end gap-6">
           <div className="relative">
             <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-white">
@@ -83,33 +140,33 @@ const ArtisanProfile: React.FC = () => {
                 <Calendar className="text-gray-500" />
                 <div>
                   <p className="text-gray-500">Member Since</p>
-                  <p className="font-medium">May 2021</p>
+                  <p className="font-medium">{artisan.joinedDate || 'N/A'}</p>
                 </div>
               </div>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6 pb-6 border-b">
               <div className="flex items-center gap-3">
-                <Badge className="p-1.5 bg-blue-100 text-blue-800 hover:bg-blue-100">7</Badge>
+                <Users className="text-gray-500 h-5 w-5" /> {/* Icon for Experience */}
                 <div>
-                  <p className="font-medium">Experience</p>
-                  <p className="text-sm text-gray-500">years</p>
+                  <p className="font-medium">{artisan.yearsOfExperience || 'N/A'} years</p>
+                  <p className="text-sm text-gray-500">Experience</p>
                 </div>
               </div>
               
               <div className="flex items-center gap-3">
-                <Clock className="text-gray-500" />
+                <Clock className="text-gray-500 h-5 w-5" />
                 <div>
-                  <p className="font-medium">Responds in</p>
-                  <p className="text-sm text-gray-500">Within 2 hours</p>
+                  <p className="font-medium">{artisan.typicalResponseTime || 'N/A'}</p>
+                  <p className="text-sm text-gray-500">Responds in</p>
                 </div>
               </div>
               
               <div className="flex items-center gap-3">
-                <CheckCircle className="text-green-500" />
+                <Zap className="text-gray-500 h-5 w-5" /> {/* Icon for Completion Rate */}
                 <div>
-                  <p className="font-medium">Completion Rate</p>
-                  <p className="text-sm text-gray-500">98%</p>
+                  <p className="font-medium">{artisan.completionRate ? `${artisan.completionRate}%` : 'N/A'}</p>
+                  <p className="text-sm text-gray-500">Completion Rate</p>
                 </div>
               </div>
             </div>
@@ -119,11 +176,15 @@ const ArtisanProfile: React.FC = () => {
               <p className="text-gray-600 mb-6">{artisan.description}</p>
               
               <h2 className="text-xl font-semibold mb-4">Services</h2>
-              <ul className="list-disc list-inside space-y-2 mb-6">
-                {artisan.services.map((service, index) => (
-                  <li key={index} className="text-gray-600">{service}</li>
-                ))}
-              </ul>
+              {artisan.services && artisan.services.length > 0 ? (
+                <ul className="list-disc list-inside space-y-2 mb-6">
+                  {artisan.services.map((service, index) => (
+                    <li key={index} className="text-gray-600">{service}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p className="text-gray-500 mb-6">This artisan has not listed any specific services.</p>
+              )}
               
               <h2 className="text-xl font-semibold mb-4">Skills</h2>
               <div className="flex flex-wrap gap-2">
@@ -205,16 +266,21 @@ const ArtisanProfile: React.FC = () => {
                   <label htmlFor="time" className="block text-sm font-medium text-gray-700 mb-1">
                     Preferred Time
                   </label>
-                  <select className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-primary">
+                  <select 
+                    id="time"
+                    value={time}
+                    onChange={(e) => setTime(e.target.value)}
+                    className="w-full border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-primary"
+                  >
                     <option value="">Select time</option>
-                    <option value="morning">Morning</option>
-                    <option value="afternoon">Afternoon</option>
-                    <option value="evening">Evening</option>
+                    <option value="morning">Morning (8am - 12pm)</option>
+                    <option value="afternoon">Afternoon (12pm - 4pm)</option>
+                    <option value="evening">Evening (4pm - 8pm)</option>
                   </select>
                 </div>
               </div>
               
-              <Button className="w-full">Send Service Request</Button>
+              <Button className="w-full" onClick={handleSubmitServiceRequest}>Send Service Request</Button>
               
               <p className="text-sm text-gray-500 text-center mt-2">
                 {artisan.name} will respond to confirm availability and provide a quote if necessary.
@@ -225,11 +291,11 @@ const ArtisanProfile: React.FC = () => {
           <div className="bg-white rounded-lg shadow-sm p-6">
             <p className="text-gray-600 mb-4">Or contact directly:</p>
             <div className="space-y-3">
-              <Button variant="outline" className="w-full flex items-center justify-center gap-2">
+              <Button variant="outline" className="w-full flex items-center justify-center gap-2" onClick={handleWhatsAppContact} disabled={!artisan.contact}>
                 <MessageSquare className="h-4 w-4" />
                 WhatsApp
               </Button>
-              <Button variant="outline" className="w-full flex items-center justify-center gap-2">
+              <Button variant="outline" className="w-full flex items-center justify-center gap-2" onClick={handleCallContact} disabled={!artisan.contact}>
                 <Phone className="h-4 w-4" />
                 Call
               </Button>
@@ -240,5 +306,7 @@ const ArtisanProfile: React.FC = () => {
     </div>
   );
 };
+
+// handleSubmitServiceRequest is now defined within the component.
 
 export default ArtisanProfile;

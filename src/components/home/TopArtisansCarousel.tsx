@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Users } from 'lucide-react'; // Added Users icon for empty state
 import {
   Carousel,
   CarouselContent,
@@ -97,28 +97,38 @@ const TopArtisansCarousel: React.FC = () => {
 
   return (
     <div className="w-full">
-      <h2 className="text-2xl font-bold mb-6">Top Rated Artisans by Category</h2>
+      <h2 className="text-2xl font-bold mb-6">Top Rated Artisans</h2> 
+      {/* Simplified title slightly, as "by Category" isn't explicitly implemented in filtering */}
       
-      <Carousel className="w-full mb-10">
-        <CarouselContent className="-ml-4">
-          {topArtisans.map((artisan) => (
-            <CarouselItem key={artisan.id} className="pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
-              <TopArtisanCard artisan={artisan} />
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <div className="flex justify-center gap-2 mt-4">
-          <CarouselPrevious className="static translate-y-0 transform-none" />
-          <CarouselNext className="static translate-y-0 transform-none" />
+      {topArtisans.length > 0 ? (
+        <>
+          <Carousel className="w-full mb-10">
+            <CarouselContent className="-ml-4">
+              {topArtisans.map((artisan) => (
+                <CarouselItem key={artisan.id} className="pl-4 sm:basis-1/2 md:basis-1/3 lg:basis-1/4">
+                  <TopArtisanCard artisan={artisan} />
+                </CarouselItem>
+              ))}
+            </CarouselContent>
+            <div className="flex justify-center gap-2 mt-4">
+              <CarouselPrevious className="static translate-y-0 transform-none" />
+              <CarouselNext className="static translate-y-0 transform-none" />
+            </div>
+          </Carousel>
+      
+          <div className="text-center">
+            <Link to="/search" className="inline-flex items-center text-primary font-medium">
+              View All Artisans
+              <ArrowRight className="h-4 w-4 ml-1" />
+            </Link>
+          </div>
+        </>
+      ) : (
+        <div className="text-center py-10">
+          <Users className="mx-auto h-12 w-12 text-gray-400 mb-4" />
+          <p className="text-gray-500">No top artisans to show at the moment.</p>
         </div>
-      </Carousel>
-      
-      <div className="text-center">
-        <Link to="/search" className="inline-flex items-center text-primary font-medium">
-          View All Artisans
-          <ArrowRight className="h-4 w-4 ml-1" />
-        </Link>
-      </div>
+      )}
     </div>
   );
 };

@@ -5,11 +5,20 @@ import { ArrowLeft } from 'lucide-react';
 import ArtisanCard from '@/components/common/ArtisanCard';
 import { useApp } from '@/contexts/AppContext';
 import { filterArtisansByCategory, getCategoryById } from '@/utils/data';
+import { useToast } from '@/components/ui/use-toast'; // Import useToast
 
 const Category: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { setSelectedCategory } = useApp();
+  const { toast } = useToast();
   
+  const handleComingSoon = (featureName: string) => {
+    toast({
+      title: featureName,
+      description: "This feature is coming soon!",
+    });
+  };
+
   useEffect(() => {
     if (id) {
       setSelectedCategory(id);
@@ -57,16 +66,16 @@ const Category: React.FC = () => {
       <div className="mb-8 flex flex-wrap items-center gap-3">
         <span className="text-sm text-gray-600">Filter by:</span>
         <div className="flex flex-wrap gap-2">
-          <button className="px-4 py-2 bg-white border border-gray-300 rounded-full text-sm hover:border-primary transition-colors">
+          <button className="px-4 py-2 bg-white border border-gray-300 rounded-full text-sm hover:border-primary transition-colors" onClick={() => handleComingSoon("Filter: Top Rated")}>
             Top Rated
           </button>
-          <button className="px-4 py-2 bg-white border border-gray-300 rounded-full text-sm hover:border-primary transition-colors">
+          <button className="px-4 py-2 bg-white border border-gray-300 rounded-full text-sm hover:border-primary transition-colors" onClick={() => handleComingSoon("Filter: Nearest")}>
             Nearest
           </button>
-          <button className="px-4 py-2 bg-white border border-gray-300 rounded-full text-sm hover:border-primary transition-colors">
+          <button className="px-4 py-2 bg-white border border-gray-300 rounded-full text-sm hover:border-primary transition-colors" onClick={() => handleComingSoon("Filter: Verified Only")}>
             Verified Only
           </button>
-          <button className="px-4 py-2 bg-white border border-gray-300 rounded-full text-sm hover:border-primary transition-colors">
+          <button className="px-4 py-2 bg-white border border-gray-300 rounded-full text-sm hover:border-primary transition-colors" onClick={() => handleComingSoon("Filter: Quick Response")}>
             Quick Response
           </button>
         </div>

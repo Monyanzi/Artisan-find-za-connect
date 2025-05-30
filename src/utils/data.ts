@@ -26,26 +26,27 @@ export interface Artisan {
   description: string;
   image: string;
   services: string[];
-  yearsOfExperience: number;
+  yearsOfExperience: number; // Will be used for display as experienceYears
   hourlyRate: number;
-  contact: string;
+  contact: string; // Will be used as phone number
   availability: string;
   reviews: ArtisanReview[];
   featured?: boolean;
   profileImage?: string;
-  verified?: boolean;
+  isVerified?: boolean; // Renamed from 'verified' for clarity and to match typical boolean naming
   reviewCount?: number;
-  yearsExperience?: number;
+  // yearsExperience?: number; // This is redundant with yearsOfExperience
   distance?: string;
-  responseTime?: string;
+  typicalResponseTime?: string; // New field
   about?: string;
   pricing?: {
     currency: string;
     min: number;
     max: number;
   };
-  completionRate?: number;
-  joinedDate?: string;
+  completionRate?: number; // Already exists, ensure it's populated
+  memberSince?: string; // New field, renamed from joinedDate for clarity if needed, or use joinedDate
+  joinedDate?: string; // Keeping joinedDate, will use as memberSince
   specialties?: string[];
 }
 
@@ -231,18 +232,19 @@ export const artisans = [
     contact: '+27 82 123 4567',
     availability: 'Mon-Fri, 8am-5pm',
     featured: true,
-    verified: true,
+    isVerified: true,
     reviewCount: 24,
     distance: '3.2 km',
-    responseTime: '2 hrs',
+    typicalResponseTime: 'Within 2 hours',
     about: 'Professional carpenter with 15 years of experience specializing in custom furniture and repairs.',
     pricing: {
       currency: 'R',
       min: 300,
       max: 500
     },
-    completionRate: 98,
-    joinedDate: 'Jan 2020',
+    completionRate: 98, // Example value
+    joinedDate: 'Jan 2020', // Will use as memberSince
+    memberSince: 'Jan 2020', 
     specialties: ['Custom Furniture', 'Reclaimed Wood', 'Bespoke Designs'],
     reviews: [
       { id: 'rev1', author: 'Samantha J.', rating: 5, comment: 'John did an amazing job fixing my antique chair!' },
@@ -266,18 +268,19 @@ export const artisans = [
     contact: '+27 73 987 6543',
     availability: '24/7 Emergency Services',
     featured: true,
-    verified: true,
+    isVerified: true,
     reviewCount: 42,
     distance: '4.7 km',
-    responseTime: '1 hr',
+    typicalResponseTime: 'Within 1 hour',
     about: 'Reliable plumber for all your plumbing needs with 24/7 emergency services available.',
     pricing: {
       currency: 'R',
       min: 350,
       max: 550
     },
-    completionRate: 97,
+    completionRate: 97, // Example value
     joinedDate: 'Mar 2019',
+    memberSince: 'Mar 2019',
     specialties: ['Geyser Expert', '24/7 Emergency', 'Drain Cleaning'],
     reviews: [
       { id: 'rev3', author: 'Linda M.', rating: 5, comment: 'Mary was quick to respond and fixed my burst pipe in no time!' },
@@ -301,18 +304,19 @@ export const artisans = [
     contact: '+27 60 234 5678',
     availability: 'Mon-Sat, 9am-6pm',
     featured: false,
-    verified: false,
+    isVerified: false,
     reviewCount: 18,
     distance: '2.1 km',
-    responseTime: '3 hrs',
+    typicalResponseTime: 'Within 3 hours',
     about: 'Certified electrician for residential and commercial properties with extensive experience in electrical wiring and fault finding.',
     pricing: {
       currency: 'R',
       min: 320,
       max: 480
     },
-    completionRate: 95,
+    completionRate: 95, // Example value
     joinedDate: 'Sep 2021',
+    memberSince: 'Sep 2021',
     specialties: ['Electrical Installations', 'Lighting Design', 'Emergency Repairs'],
     reviews: [
       { id: 'rev5', author: 'Karen P.', rating: 4, comment: 'David was punctual and did a great job installing my new lights.' },
@@ -336,18 +340,19 @@ export const artisans = [
     contact: '+27 84 345 6789',
     availability: 'Weekends and Public Holidays',
     featured: true,
-    verified: true,
+    isVerified: true,
     reviewCount: 63,
     distance: '55 km',
-    responseTime: '45 mins',
+    typicalResponseTime: 'Within 45 minutes',
     about: 'Professional photographer for weddings, events, and portraits, capturing your special moments with artistic flair.',
     pricing: {
       currency: 'R',
       min: 450,
       max: 700
     },
-    completionRate: 99,
+    completionRate: 99, // Example value
     joinedDate: 'Jun 2018',
+    memberSince: 'Jun 2018',
     specialties: ['Wedding Photography', 'Portrait Photography', 'Event Coverage'],
     reviews: [
       { id: 'rev7', author: 'Jessica B.', rating: 5, comment: 'Samantha captured our wedding day perfectly! Highly recommended.' },
@@ -371,18 +376,19 @@ export const artisans = [
     contact: '+27 79 456 7890',
     availability: 'Flexible, contact for availability',
     featured: false,
-    verified: false,
+    isVerified: false,
     reviewCount: 31,
     distance: '540 km',
-    responseTime: '1 day',
+    typicalResponseTime: 'Within 1 day',
     about: 'Delicious catering services for all types of events, offering a wide range of menu options to suit your needs.',
     pricing: {
       currency: 'R',
       min: 400,
       max: 600
     },
-    completionRate: 96,
+    completionRate: 96, // Example value
     joinedDate: 'Nov 2020',
+    memberSince: 'Nov 2020',
     specialties: ['Gourmet Cuisine', 'Custom Menus', 'Dietary Options'],
     reviews: [
       { id: 'rev9', author: 'Nadia R.', rating: 5, comment: 'Thando provided the most delicious food for our corporate event.' },
@@ -406,18 +412,19 @@ export const artisans = [
     contact: '+27 76 567 8901',
     availability: 'Mon-Fri, 10am-6pm',
     featured: false,
-    verified: true,
+    isVerified: true,
     reviewCount: 28,
     distance: '1400 km',
-    responseTime: '2 days',
+    typicalResponseTime: 'Within 2 days',
     about: 'Custom sewing and tailoring services for all your clothing needs, creating unique and stylish garments.',
     pricing: {
       currency: 'R',
       min: 250,
       max: 450
     },
-    completionRate: 97,
+    completionRate: 97, // Example value
     joinedDate: 'Apr 2022',
+    memberSince: 'Apr 2022',
     specialties: ['Bridal Alterations', 'Custom Designs', 'Clothing Repairs'],
     reviews: [
       { id: 'rev11', author: 'Leah C.', rating: 5, comment: 'Aisha did an amazing job altering my wedding dress!' },
@@ -434,25 +441,26 @@ export const artisans = [
     description: 'Unique handmade pottery and ceramics for your home.',
     image: '/images/artisans/potter.jpg',
     profileImage: '/placeholder.svg',
-    services: ['Pottery', 'Ceramics', 'Handmade Crafts'],
+    services: [], // Zola Potter now offers no specific services listed
     yearsOfExperience: 5,
     yearsExperience: 5,
     hourlyRate: 250,
     contact: '+27 83 678 9012',
     availability: 'Weekends, 10am-4pm',
     featured: false,
-    verified: false,
+    isVerified: false, // Example: Zola is not verified
     reviewCount: 15,
     distance: '6.8 km',
-    responseTime: '4 hrs',
+    typicalResponseTime: 'Within 4 hours',
     about: 'Unique handmade pottery and ceramics for your home, adding a touch of artistry to your living space.',
     pricing: {
       currency: 'R',
       min: 200,
       max: 350
     },
-    completionRate: 94,
+    completionRate: 94, // Example value
     joinedDate: 'Jul 2021',
+    memberSince: 'Jul 2021',
     specialties: ['Functional Pottery', 'Decorative Ceramics', 'Custom Orders'],
     reviews: [
       { id: 'rev13', author: 'Susan W.', rating: 5, comment: 'Zola’s pottery is beautiful and unique. I love my new vase!' },
@@ -476,18 +484,19 @@ export const artisans = [
     contact: '+27 74 789 0123',
     availability: 'Mon-Fri, 3pm-7pm',
     featured: false,
-    verified: true,
+    isVerified: true,
     reviewCount: 22,
     distance: '1400 km',
-    responseTime: '1 day',
+    typicalResponseTime: 'Within 1 day',
     about: 'Experienced tutor for math and science subjects, helping students achieve their academic goals.',
     pricing: {
       currency: 'R',
       min: 280,
       max: 400
     },
-    completionRate: 98,
+    completionRate: 98, // Example value
     joinedDate: 'Dec 2019',
+    memberSince: 'Dec 2019',
     specialties: ['Math Specialist', 'Science Expert', 'Exam Prep'],
     reviews: [
       { id: 'rev15', author: 'Lisa G.', rating: 5, comment: 'Nandi helped my son improve his math grade significantly.' },
@@ -511,18 +520,19 @@ export const artisans = [
     contact: '+27 81 890 1234',
     availability: '24/7, contact for availability',
     featured: true,
-    verified: true,
+    isVerified: true,
     reviewCount: 55,
     distance: '12 km',
-    responseTime: '30 mins',
+    typicalResponseTime: 'Within 30 minutes',
     about: 'Reliable driving and transport services for all your needs, ensuring safe and timely transportation.',
     pricing: {
       currency: 'R',
       min: 330,
       max: 500
     },
-    completionRate: 99,
+    completionRate: 99, // Example value
     joinedDate: 'Aug 2020',
+    memberSince: 'Aug 2020',
     specialties: ['Airport Transfers', 'Parcel Delivery', 'Long Distance'],
     reviews: [
       { id: 'rev17', author: 'Thandi N.', rating: 5, comment: 'Sipho is always on time and very professional.' },
@@ -546,18 +556,19 @@ export const artisans = [
     contact: '+27 72 901 2345',
     availability: 'Mon-Fri, 9am-5pm',
     featured: false,
-    verified: false,
+    isVerified: false,
     reviewCount: 29,
     distance: '55 km',
-    responseTime: '1 day',
+    typicalResponseTime: 'Within 1 day', // Example - might be missing for some
     about: 'Creative graphic and web designer for all your design needs, crafting visually appealing and effective designs.',
     pricing: {
       currency: 'R',
       min: 380,
       max: 550
     },
-    completionRate: 96,
+    completionRate: null, // Example - might be missing for some
     joinedDate: 'Feb 2021',
+    memberSince: 'Feb 2021',
     specialties: ['Branding', 'UI/UX Design', 'Print Media'],
     reviews: [
       { id: 'rev19', author: 'Karen L.', rating: 5, comment: 'Lerato created a beautiful logo for my business.' },
@@ -606,7 +617,8 @@ export interface User {
   location: string;
   isArtisan: boolean;
   // Add other fields from Artisan if they become commonly used by User context
-  profileImage?: string; 
+  profileImage?: string; // Already present from previous step, ensure it's used as profileImageUrl
+  profileImageUrl?: string; // Adding this for clarity as requested
   category?: string;
   skills?: string[];
   description?: string;
@@ -615,14 +627,16 @@ export interface User {
 
 export const mockAppContextUser: User = {
   id: artisans[0].id,
-  name: artisans[0].name,
+  name: artisans[0].name, // Will be 'John Carpenter'
   email: 'john.carpenter@example.com', // Mock email
   phone: artisans[0].contact,
   joinDate: artisans[0].joinedDate || 'Jan 2020',
   location: artisans[0].location,
-  isArtisan: true, // John Carpenter is an artisan
-  profileImage: artisans[0].profileImage,
-  category: artisans[0].category,
+  isArtisan: false, // Set to false for testing "Become an Artisan" button
+  profileImageUrl: '/lovable-uploads/8785989a-e088-46b1-9e6d-77220291abbf.png', // Using a known public image
+  // Keeping other artisan-specific fields from previous User definition for completeness if needed elsewhere
+  category: artisans[0].category, 
   skills: artisans[0].skills,
   description: artisans[0].description,
+  profileImage: artisans[0].profileImage, // Keep original profileImage if used by ArtisanCard directly
 };
