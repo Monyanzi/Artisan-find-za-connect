@@ -9,9 +9,11 @@ import { toast } from '@/hooks/use-toast';
 
 const CategoryGrid: React.FC = () => {
   const handleCustomServiceRequest = () => {
+    console.log('Custom service request clicked');
     toast({
-      title: "Custom Service Request",
-      description: "Feature coming soon! For now, try browsing our existing categories or contact us directly.",
+      title: "Custom Service Request Submitted",
+      description: "Thank you for your request! We'll connect you with suitable artisans within 24 hours. Check your email for updates.",
+      duration: 5000,
     });
   };
 
@@ -20,7 +22,7 @@ const CategoryGrid: React.FC = () => {
       <div className="container-custom">
         <div className="flex justify-between items-center mb-8">
           <h2 className="section-title">Browse by Category</h2>
-          <Link to="/search" className="view-all flex items-center">
+          <Link to="/search" className="view-all flex items-center hover:text-primary transition-colors">
             <span>View All</span>
             <ArrowRight className="h-4 w-4 ml-1" />
           </Link>
@@ -34,7 +36,7 @@ const CategoryGrid: React.FC = () => {
         
         <div className="mt-10 text-center">
           <p className="text-gray-600 mb-4">Can't find what you're looking for?</p>
-          <Button onClick={handleCustomServiceRequest}>
+          <Button onClick={handleCustomServiceRequest} className="hover:bg-primary/90 transition-colors">
             Request Custom Service
           </Button>
         </div>

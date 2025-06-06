@@ -11,14 +11,14 @@ const Hero: React.FC = () => {
   const navigate = useNavigate();
 
   const handleSearch = () => {
-    if (searchTerm.trim()) {
-      navigate('/search');
-    }
+    // Always navigate to search page when search is triggered
+    navigate('/search');
   };
 
   const handlePopularSearch = (term: string) => {
     setSearchTerm(term);
-    navigate('/search');
+    // Navigate immediately after setting the search term
+    setTimeout(() => navigate('/search'), 100);
   };
 
   const handleLearnMore = () => {
@@ -56,28 +56,28 @@ const Hero: React.FC = () => {
             <span className="text-white/80">Popular:</span>
             <Button 
               variant="link" 
-              className="text-white h-auto p-0"
+              className="text-white h-auto p-0 hover:text-white/80"
               onClick={() => handlePopularSearch('plumbing')}
             >
               Plumbing
             </Button>
             <Button 
               variant="link" 
-              className="text-white h-auto p-0"
+              className="text-white h-auto p-0 hover:text-white/80"
               onClick={() => handlePopularSearch('electrical')}
             >
               Electrical
             </Button>
             <Button 
               variant="link" 
-              className="text-white h-auto p-0"
+              className="text-white h-auto p-0 hover:text-white/80"
               onClick={() => handlePopularSearch('painting')}
             >
               Painting
             </Button>
             <Button 
               variant="link" 
-              className="text-white h-auto p-0"
+              className="text-white h-auto p-0 hover:text-white/80"
               onClick={() => handlePopularSearch('carpentry')}
             >
               Carpentry

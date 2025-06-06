@@ -30,6 +30,10 @@ const App = () => {
     setSidebarOpen(!sidebarOpen);
   };
 
+  const closeSidebar = () => {
+    setSidebarOpen(false);
+  };
+
   return (
     <QueryClientProvider client={queryClient}>
       <AppProvider>
@@ -39,9 +43,9 @@ const App = () => {
           <BrowserRouter>
             <div className="min-h-screen flex flex-col">
               <Navbar toggleSidebar={toggleSidebar} />
-              <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+              <Sidebar isOpen={sidebarOpen} onClose={closeSidebar} />
               
-              <main className="pt-16 flex-1 lg:pl-64">
+              <main className={`pt-16 flex-1 transition-all duration-300 ${sidebarOpen ? 'lg:pl-64' : 'lg:pl-64'}`}>
                 <Routes>
                   <Route path="/" element={<Index />} />
                   <Route path="/category/:id" element={<Category />} />

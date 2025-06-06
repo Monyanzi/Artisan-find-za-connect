@@ -26,6 +26,13 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && onSearch) {
+      e.preventDefault();
+      onSearch();
+    }
+  };
+
+  const handleSearchClick = () => {
+    if (onSearch) {
       onSearch();
     }
   };
@@ -39,19 +46,18 @@ const SearchBar: React.FC<SearchBarProps> = ({
         <input
           type="text"
           placeholder={placeholder}
-          className="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+          className="w-full pl-10 pr-12 py-3 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
           value={value}
           onChange={(e) => onChange(e.target.value)}
           onKeyPress={handleKeyPress}
         />
-        {onSearch && (
-          <button
-            type="submit"
-            className="absolute inset-y-0 right-0 pr-3 flex items-center text-primary hover:text-primary/80 transition-colors"
-          >
-            <Search className="h-5 w-5" />
-          </button>
-        )}
+        <button
+          type="button"
+          onClick={handleSearchClick}
+          className="absolute inset-y-0 right-0 pr-3 flex items-center text-primary hover:text-primary/80 transition-colors cursor-pointer"
+        >
+          <Search className="h-5 w-5" />
+        </button>
       </div>
     </form>
   );
