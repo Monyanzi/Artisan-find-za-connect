@@ -39,24 +39,53 @@ const ContactArtisanModal: React.FC<ContactArtisanModalProps> = ({
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate API call
-    console.log('API_CALL: POST /api/contacts', {
-      artisanId: artisan.id,
-      ...formData,
-    });
+    // Validate required fields
+    if (!formData.name || !formData.email || !formData.message) {
+      toast({
+        title: "Missing Information",
+        description: "Please fill in all required fields (Name, Email, and Message).",
+        variant: "destructive",
+        duration: 4000,
+      });
+      setIsSubmitting(false);
+      return;
+    }
 
-    // Simulate network delay
-    await new Promise(resolve => setTimeout(resolve, 1000));
+    try {
+      // Simulate API call with realistic delay
+      console.log('Sending contact request:', {
+        artisanId: artisan.id,
+        artisanName: artisan.name,
+        clientName: formData.name,
+        clientEmail: formData.email,
+        clientPhone: formData.phone,
+        serviceType: formData.serviceType,
+        message: formData.message,
+        timestamp: new Date().toISOString(),
+      });
 
-    toast({
-      title: "Message Sent Successfully!",
-      description: `Your message has been sent to ${artisan.name}. They will contact you within 24 hours.`,
-      duration: 5000,
-    });
+      // Simulate network delay
+      await new Promise(resolve => setTimeout(resolve, 1500));
 
-    setIsSubmitting(false);
-    setFormData({ name: '', email: '', phone: '', message: '', serviceType: '' });
-    onClose();
+      toast({
+        title: "Message Sent Successfully!",
+        description: `Your message has been sent to ${artisan.name}. They typically respond within ${artisan.responseTime || '24 hours'}.`,
+        duration: 6000,
+      });
+
+      // Reset form and close modal
+      setFormData({ name: '', email: '', phone: '', message: '', serviceType: '' });
+      onClose();
+    } catch (error) {
+      toast({
+        title: "Failed to Send Message",
+        description: "There was an error sending your message. Please try again or contact the artisan directly.",
+        variant: "destructive",
+        duration: 5000,
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -66,8 +95,15 @@ const ContactArtisanModal: React.FC<ContactArtisanModalProps> = ({
     });
   };
 
+  const handleClose = () => {
+    if (!isSubmitting) {
+      setFormData({ name: '', email: '', phone: '', message: '', serviceType: '' });
+      onClose();
+    }
+  };
+
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={isOpen} onOpenChange={handleClose}>
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
           <DialogTitle>Contact {artisan.name}</DialogTitle>
@@ -87,6 +123,7 @@ const ContactArtisanModal: React.FC<ContactArtisanModalProps> = ({
                 onChange={handleInputChange}
                 required
                 placeholder="Enter your name"
+                disabled={isSubmitting}
               />
             </div>
             <div>
@@ -98,6 +135,7 @@ const ContactArtisanModal: React.FC<ContactArtisanModalProps> = ({
                 value={formData.phone}
                 onChange={handleInputChange}
                 placeholder="+27 XX XXX XXXX"
+                disabled={isSubmitting}
               />
             </div>
           </div>
@@ -112,6 +150,7 @@ const ContactArtisanModal: React.FC<ContactArtisanModalProps> = ({
               onChange={handleInputChange}
               required
               placeholder="your.email@example.com"
+              disabled={isSubmitting}
             />
           </div>
           
@@ -123,6 +162,7 @@ const ContactArtisanModal: React.FC<ContactArtisanModalProps> = ({
               value={formData.serviceType}
               onChange={handleInputChange}
               placeholder="e.g., Kitchen renovation, Plumbing repair"
+              disabled={isSubmitting}
             />
           </div>
           
@@ -136,11 +176,12 @@ const ContactArtisanModal: React.FC<ContactArtisanModalProps> = ({
               required
               placeholder="Describe your project, timeline, and any specific requirements..."
               rows={4}
+              disabled={isSubmitting}
             />
           </div>
           
           <DialogFooter>
-            <Button type="button" variant="outline" onClick={onClose}>
+            <Button type="button" variant="outline" onClick={handleClose} disabled={isSubmitting}>
               Cancel
             </Button>
             <Button type="submit" disabled={isSubmitting}>

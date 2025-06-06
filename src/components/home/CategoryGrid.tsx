@@ -10,11 +10,16 @@ import { toast } from '@/hooks/use-toast';
 const CategoryGrid: React.FC = () => {
   const handleCustomServiceRequest = () => {
     console.log('Custom service request clicked');
+    
+    // Simulate processing the request
     toast({
       title: "Custom Service Request Submitted",
       description: "Thank you for your request! We'll connect you with suitable artisans within 24 hours. Check your email for updates.",
-      duration: 5000,
+      duration: 6000,
     });
+
+    // You could also open a modal here for more detailed request form
+    // or navigate to a dedicated custom service request page
   };
 
   return (
@@ -29,7 +34,7 @@ const CategoryGrid: React.FC = () => {
         </div>
         
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-          {categories.map((category) => (
+          {categories.slice(0, 12).map((category) => (
             <CategoryCard key={category.id} category={category} />
           ))}
         </div>

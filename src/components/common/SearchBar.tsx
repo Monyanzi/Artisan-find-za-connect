@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { Search } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 interface SearchBarProps {
   value: string;
@@ -17,23 +18,38 @@ const SearchBar: React.FC<SearchBarProps> = ({
   placeholder = "Search for an artisan or service...",
   className = ""
 }) => {
+  const navigate = useNavigate();
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (onSearch) {
-      onSearch();
+    if (value.trim()) {
+      if (onSearch) {
+        onSearch();
+      } else {
+        // Default behavior: navigate to search page with query
+        navigate(`/search?q=${encodeURIComponent(value.trim())}`);
+      }
     }
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter' && onSearch) {
+    if (e.key === 'Enter' && value.trim()) {
       e.preventDefault();
-      onSearch();
+      if (onSearch) {
+        onSearch();
+      } else {
+        navigate(`/search?q=${encodeURIComponent(value.trim())}`);
+      }
     }
   };
 
   const handleSearchClick = () => {
-    if (onSearch) {
-      onSearch();
+    if (value.trim()) {
+      if (onSearch) {
+        onSearch();
+      } else {
+        navigate(`/search?q=${encodeURIComponent(value.trim())}`);
+      }
     }
   };
 
@@ -54,7 +70,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
         <button
           type="button"
           onClick={handleSearchClick}
-          className="absolute inset-y-0 right-0 pr-3 flex items-center text-primary hover:text-primary/80 transition-colors cursor-pointer"
+          className="absolute inset-y-0 right-0 pr-3 flex items-center text-primary hover:text-primary/80 transition-colors cursor-pointer disabled:opacity-50"
+          disabled={!value.trim()}
         >
           <Search className="h-5 w-5" />
         </button>
