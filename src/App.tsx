@@ -15,6 +15,7 @@ import Index from "./pages/Index";
 import Category from "./pages/Category";
 import ArtisanProfile from "./pages/ArtisanProfile";
 import Search from "./pages/Search";
+import AllArtisans from "./pages/AllArtisans";
 import Bookings from "./pages/Bookings";
 import Messages from "./pages/Messages";
 import Profile from "./pages/Profile";
@@ -46,6 +47,7 @@ const App = () => {
                   <Route path="/category/:id" element={<Category />} />
                   <Route path="/artisan/:id" element={<ArtisanProfile />} />
                   <Route path="/search" element={<Search />} />
+                  <Route path="/artisans" element={<AllArtisans />} />
                   <Route path="/bookings" element={<Bookings />} />
                   <Route path="/messages" element={<Messages />} />
                   <Route path="/profile" element={<Profile />} />

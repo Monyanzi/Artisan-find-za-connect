@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
@@ -114,7 +113,7 @@ const TopArtisansCarousel: React.FC = () => {
       </Carousel>
       
       <div className="text-center">
-        <Link to="/search" className="inline-flex items-center text-primary font-medium">
+        <Link to="/artisans" className="inline-flex items-center text-primary font-medium">
           View All Artisans
           <ArrowRight className="h-4 w-4 ml-1" />
         </Link>

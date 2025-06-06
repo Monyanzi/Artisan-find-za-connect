@@ -3,10 +3,31 @@ import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useApp } from '@/contexts/AppContext';
+import { useNavigate } from 'react-router-dom';
 import SearchBar from '../common/SearchBar';
 
 const Hero: React.FC = () => {
   const { searchTerm, setSearchTerm } = useApp();
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    if (searchTerm.trim()) {
+      navigate('/search');
+    }
+  };
+
+  const handlePopularSearch = (term: string) => {
+    setSearchTerm(term);
+    navigate('/search');
+  };
+
+  const handleLearnMore = () => {
+    // Scroll to category section or show how it works modal
+    const categorySection = document.querySelector('[data-section="categories"]');
+    if (categorySection) {
+      categorySection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
   return (
     <div className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-blue-700 overflow-hidden">
@@ -25,6 +46,7 @@ const Hero: React.FC = () => {
             <SearchBar 
               value={searchTerm}
               onChange={setSearchTerm}
+              onSearch={handleSearch}
               placeholder="What service do you need today?"
               className="mb-0"
             />
@@ -32,10 +54,34 @@ const Hero: React.FC = () => {
           
           <div className="mt-6 flex flex-wrap justify-center gap-2 text-sm">
             <span className="text-white/80">Popular:</span>
-            <Button variant="link" className="text-white h-auto p-0">Plumbing</Button>
-            <Button variant="link" className="text-white h-auto p-0">Electrical</Button>
-            <Button variant="link" className="text-white h-auto p-0">Painting</Button>
-            <Button variant="link" className="text-white h-auto p-0">Carpentry</Button>
+            <Button 
+              variant="link" 
+              className="text-white h-auto p-0"
+              onClick={() => handlePopularSearch('plumbing')}
+            >
+              Plumbing
+            </Button>
+            <Button 
+              variant="link" 
+              className="text-white h-auto p-0"
+              onClick={() => handlePopularSearch('electrical')}
+            >
+              Electrical
+            </Button>
+            <Button 
+              variant="link" 
+              className="text-white h-auto p-0"
+              onClick={() => handlePopularSearch('painting')}
+            >
+              Painting
+            </Button>
+            <Button 
+              variant="link" 
+              className="text-white h-auto p-0"
+              onClick={() => handlePopularSearch('carpentry')}
+            >
+              Carpentry
+            </Button>
           </div>
         </div>
       </div>
@@ -43,10 +89,13 @@ const Hero: React.FC = () => {
       <div className="bg-accent py-3">
         <div className="container-custom flex justify-between items-center">
           <p className="text-sm font-medium">Trusted by over 10,000 South Africans</p>
-          <div className="flex items-center">
+          <button 
+            onClick={handleLearnMore}
+            className="flex items-center hover:text-primary transition-colors cursor-pointer"
+          >
             <span className="text-sm font-medium">Learn how it works</span>
             <ArrowRight className="h-4 w-4 ml-2" />
-          </div>
+          </button>
         </div>
       </div>
     </div>
